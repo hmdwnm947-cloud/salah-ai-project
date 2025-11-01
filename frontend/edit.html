@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعديل الصور - Salah</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/edit.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- القائمة الجانبية -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-robot"></i> Salah</h2>
+            </div>
+            <ul class="menu">
+                <li><a href="/home"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="/generate"><i class="fas fa-magic"></i> توليد الصور</a></li>
+                <li><a href="/edit" class="active"><i class="fas fa-edit"></i> تعديل الصور</a></li>
+                <li><a href="/extract"><i class="fas fa-search"></i> استخراج البرومبتات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+            </ul>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <p class="username">مستخدم Salah</p>
+                    <p class="user-status">الحساب مجاني</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <div class="header">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h1>تعديل الصور</h1>
+                <div class="user-actions">
+                    <button class="btn-notification"><i class="fas fa-bell"></i></button>
+                    <button class="btn-upgrade">ترقية الحساب</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="edit-container">
+                    <div class="upload-section">
+                        <h2>رفع الصور للتعديل</h2>
+                        <p class="section-description">يمكنك رفع حتى 10 صور لتعديلها باستخدام الذكاء الاصطناعي</p>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>اسحب وأفلت الصور هنا أو انقر للاختيار</p>
+                            <span>يدعم JPG, PNG, GIF, WEBP (الحد الأقصى 10 صور)</span>
+                            <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div class="uploaded-images" id="uploadedImages">
+                            <div class="empty-upload">
+                                <i class="fas fa-images"></i>
+                                <p>لم يتم رفع أي صور بعد</p>
+                                <small>سيتم عرض الصور المرفوعة هنا</small>
+                            </div>
+                        </div>
+                        
+                        <div class="edit-options">
+                            <h3>خيارات التعديل</h3>
+                            <div class="prompt-container">
+                                <label for="edit-prompt">وصف التعديل المطلوب:</label>
+                                <textarea id="edit-prompt" placeholder="صف التعديل الذي تريده، مثال: جعل الصورة أكثر إشراقاً، إضافة تأثير فني، دمج الصور معاً..."></textarea>
+                                <div class="prompt-counter">
+                                    <span id="edit-char-count">0</span>/300 حرف
+                                </div>
+                            </div>
+                            
+                            <div class="quick-actions">
+                                <h4>أوامر سريعة:</h4>
+                                <div class="quick-buttons">
+                                    <button class="quick-btn" data-prompt="جعل الصورة أكثر إشراقاً ووضوحاً">
+                                        <i class="fas fa-sun"></i>
+                                        زيادة الإشراق
+                                    </button>
+                                    <button class="quick-btn" data-prompt="تحسين جودة ودقة الصورة">
+                                        <i class="fas fa-star"></i>
+                                        تحسين الجودة
+                                    </button>
+                                    <button class="quick-btn" data-prompt="إضافة تأثير فني احترافي">
+                                        <i class="fas fa-palette"></i>
+                                        تأثير فني
+                                    </button>
+                                    <button class="quick-btn" data-prompt="دمج الصور معاً بشكل طبيعي">
+                                        <i class="fas fa-object-group"></i>
+                                        دمج الصور
+                                    </button>
+                                    <button class="quick-btn" data-prompt="تحويل الصورة إلى رسم كرتوني">
+                                        <i class="fas fa-smile"></i>
+                                        نمط كرتون
+                                    </button>
+                                    <button class="quick-btn" data-prompt="إزالة الخلفية من الصورة">
+                                        <i class="fas fa-cut"></i>
+                                        إزالة الخلفية
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="edit-btn" class="edit-button" disabled>
+                            <i class="fas fa-edit"></i>
+                            تعديل الصور
+                        </button>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h2>النتيجة</h2>
+                        <div class="result-placeholder" id="resultPlaceholder">
+                            <i class="fas fa-image"></i>
+                            <p>الصورة المعدلة ستظهر هنا</p>
+                            <small>بعد اكتمال عملية التعديل</small>
+                        </div>
+                        <div class="edit-result" id="editResult" style="display: none;">
+                            <div class="result-header">
+                                <h3>الصورة المعدلة</h3>
+                                <div class="result-meta">
+                                    <span id="result-time"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="image-comparison">
+                                <div class="comparison-container">
+                                    <div class="original-images">
+                                        <h4>الصور الأصلية</h4>
+                                        <div class="original-grid" id="originalGrid">
+                                            <!-- ستظهر الصور الأصلية هنا -->
+                                        </div>
+                                    </div>
+                                    <div class="edited-image">
+                                        <h4>الصورة المعدلة</h4>
+                                        <div class="image-container">
+                                            <img id="result-image" src="" alt="الصورة المعدلة">
+                                            <div class="image-overlay">
+                                                <button class="overlay-btn fullscreen-btn">
+                                                    <i class="fas fa-expand"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="edit-info">
+                                <h4>معلومات التعديل</h4>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span>وصف التعديل:</span>
+                                        <p id="edit-description"></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span>عدد الصور:</span>
+                                        <p id="edit-count"></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span>الوقت:</span>
+                                        <p id="edit-time"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-actions">
+                                <button class="action-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    تحميل الصورة
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share"></i>
+                                    مشاركة
+                                </button>
+                                <button class="action-btn reedit-btn">
+                                    <i class="fas fa-redo"></i>
+                                    تعديل آخر
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="history-section">
+                    <h3>التعديلات السابقة</h3>
+                    <div class="history-grid" id="historyGrid">
+                        <div class="empty-history">
+                            <i class="fas fa-history"></i>
+                            <p>لا توجد تعديلات سابقة</p>
+                            <small>سيتم عرض التعديلات التي تقوم بها هنا</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة العرض الكامل -->
+    <div class="fullscreen-modal" id="fullscreenModal" style="display: none;">
+        <div class="fullscreen-content">
+            <button class="close-fullscreen">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="fullscreen-image" src="" alt="الصورة المعدلة">
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/edit.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salah - الذكاء الاصطناعي للصور</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- القائمة الجانبية -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-robot"></i> Salah</h2>
+            </div>
+            <ul class="menu">
+                <li><a href="/home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="/generate"><i class="fas fa-magic"></i> توليد الصور</a></li>
+                <li><a href="/edit"><i class="fas fa-edit"></i> تعديل الصور</a></li>
+                <li><a href="/extract"><i class="fas fa-search"></i> استخراج البرومبتات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+            </ul>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <p class="username">مستخدم Salah</p>
+                    <p class="user-status">الحساب مجاني</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <div class="header">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h1>مرحباً بك في Salah</h1>
+                <div class="user-actions">
+                    <button class="btn-notification"><i class="fas fa-bell"></i></button>
+                    <button class="btn-upgrade">ترقية الحساب</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="welcome-section">
+                    <h2>اختر الخدمة التي تريدها</h2>
+                    <p>منصة Salah تقدم لك أحدث تقنيات الذكاء الاصطناعي للتعامل مع الصور بطريقة سهلة ومتقدمة</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" onclick="location.href='/generate'">
+                        <div class="service-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3>توليد الصور</h3>
+                        <p>قم بتوليد صور فريدة من نوعها باستخدام الذكاء الاصطناعي المتقدم</p>
+                        <button class="btn-service">ابدأ الآن</button>
+                    </div>
+
+                    <div class="service-card" onclick="location.href='/edit'">
+                        <div class="service-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>تعديل الصور</h3>
+                        <p>قم بتعديل وتحسين صورك باستخدام تقنيات الذكاء الاصطناعي الذكية</p>
+                        <button class="btn-service">ابدأ الآن</button>
+                    </div>
+
+                    <div class="service-card" onclick="location.href='/extract'">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>استخراج البرومبتات</h3>
+                        <p>استخرج وصف الصور باستخدام الذكاء الاصطناعي المتقدم</p>
+                        <button class="btn-service">ابدأ الآن</button>
+                    </div>
+                </div>
+
+                <div class="api-status">
+                    <h3>حالة الخدمات</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-indicator active"></div>
+                            <span>توليد الصور</span>
+                            <small>متصل</small>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-indicator active"></div>
+                            <span>تعديل الصور</span>
+                            <small>متصل</small>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-indicator active"></div>
+                            <span>استخراج البرومبتات</span>
+                            <small>متصل</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-stats">
+                    <h3>إحصائيات سريعة</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-image"></i>
+                            <div class="stat-info">
+                                <h4>0</h4>
+                                <p>صور مولدة</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-edit"></i>
+                            <div class="stat-info">
+                                <h4>0</h4>
+                                <p>صور معدلة</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-search"></i>
+                            <div class="stat-info">
+                                <h4>0</h4>
+                                <p>برومبتات مستخرجة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

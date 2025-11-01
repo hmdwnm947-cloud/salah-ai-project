@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استخراج البرومبتات - Salah</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/extract.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- القائمة الجانبية -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-robot"></i> Salah</h2>
+            </div>
+            <ul class="menu">
+                <li><a href="/home"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="/generate"><i class="fas fa-magic"></i> توليد الصور</a></li>
+                <li><a href="/edit"><i class="fas fa-edit"></i> تعديل الصور</a></li>
+                <li><a href="/extract" class="active"><i class="fas fa-search"></i> استخراج البرومبتات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+            </ul>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <p class="username">مستخدم Salah</p>
+                    <p class="user-status">الحساب مجاني</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <div class="header">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h1>استخراج البرومبتات</h1>
+                <div class="user-actions">
+                    <button class="btn-notification"><i class="fas fa-bell"></i></button>
+                    <button class="btn-upgrade">ترقية الحساب</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="extract-container">
+                    <div class="upload-section">
+                        <h2>رفع الصور لاستخراج الوصف</h2>
+                        <p class="section-description">قم برفع الصور لاستخراج وصف مفصل باستخدام الذكاء الاصطناعي المتقدم</p>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>اسحب وأفلت الصور هنا أو انقر للاختيار</p>
+                            <span>يدعم JPG, PNG, GIF, WEBP (الحد الأقصى 10 صور)</span>
+                            <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div class="uploaded-images" id="uploadedImages">
+                            <div class="empty-upload">
+                                <i class="fas fa-images"></i>
+                                <p>لم يتم رفع أي صور بعد</p>
+                                <small>سيتم عرض الصور المرفوعة هنا</small>
+                            </div>
+                        </div>
+                        
+                        <div class="extract-options">
+                            <h3>خيارات الاستخراج</h3>
+                            
+                            <div class="prompt-type">
+                                <label>نوع الوصف المطلوب:</label>
+                                <div class="type-buttons">
+                                    <button class="type-btn active" data-type="basic" data-prompt="describe this picture">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span>وصف أساسي</span>
+                                        <small>وصف مختصر للصورة</small>
+                                    </button>
+                                    <button class="type-btn" data-type="detailed" data-prompt="describe this picture in detail">
+                                        <i class="fas fa-file-contract"></i>
+                                        <span>وصف مفصل</span>
+                                        <small>تحليل تفصيلي للصورة</small>
+                                    </button>
+                                    <button class="type-btn" data-type="artistic" data-prompt="describe the artistic elements in this picture">
+                                        <i class="fas fa-palette"></i>
+                                        <span>عناصر فنية</span>
+                                        <small>التركيز على الجوانب الفنية</small>
+                                    </button>
+                                    <button class="type-btn" data-type="custom" data-prompt="">
+                                        <i class="fas fa-edit"></i>
+                                        <span>مخصص</span>
+                                        <small>أدخل الطلب الخاص بك</small>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="custom-prompt" id="customPrompt" style="display: none;">
+                                <label for="custom-prompt-text">أدخل الطلب المخصص:</label>
+                                <textarea id="custom-prompt-text" placeholder="مثال: اشرح العناصر الرئيسية في هذه الصورة، صف الألوان والتركيب..."></textarea>
+                                <div class="prompt-counter">
+                                    <span id="custom-char-count">0</span>/200 حرف
+                                </div>
+                            </div>
+                            
+                            <div class="advanced-options">
+                                <h4>
+                                    <i class="fas fa-cog"></i>
+                                    خيارات متقدمة
+                                    <span class="toggle-advanced">إظهار <i class="fas fa-chevron-down"></i></span>
+                                </h4>
+                                <div class="advanced-content" style="display: none;">
+                                    <div class="option-group">
+                                        <label>
+                                            <input type="checkbox" id="include-colors" checked>
+                                            تضمين وصف الألوان
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" id="include-composition" checked>
+                                            تضمين وصف التركيب
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" id="include-mood">
+                                            تضمين وصف الحالة المزاجية
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="extract-btn" class="extract-button" disabled>
+                            <i class="fas fa-search"></i>
+                            استخراج الوصف
+                        </button>
+                    </div>
+                    
+                    <div class="result-section">
+                        <h2>النتيجة</h2>
+                        <div class="result-placeholder" id="resultPlaceholder">
+                            <i class="fas fa-file-alt"></i>
+                            <p>وصف الصور سيظهر هنا</p>
+                            <small>بعد اكتمال عملية الاستخراج</small>
+                        </div>
+                        <div class="extract-result" id="extractResult" style="display: none;">
+                            <div class="result-header">
+                                <h3>الوصف المستخرج</h3>
+                                <div class="result-meta">
+                                    <span id="result-time"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="description-content">
+                                <div class="description-text">
+                                    <p id="description-text"></p>
+                                </div>
+                                
+                                <div class="description-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-font"></i>
+                                        <span>عدد الكلمات:</span>
+                                        <strong id="word-count">0</strong>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>وقت القراءة:</span>
+                                        <strong id="read-time">0</strong>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-images"></i>
+                                        <span>عدد الصور:</span>
+                                        <strong id="image-count">0</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="source-images">
+                                <h4>الصور المصدر</h4>
+                                <div class="images-grid" id="sourceImages">
+                                    <!-- ستظهر الصور المصدر هنا -->
+                                </div>
+                            </div>
+                            
+                            <div class="result-actions">
+                                <button class="action-btn copy-btn">
+                                    <i class="fas fa-copy"></i>
+                                    نسخ الوصف
+                                </button>
+                                <button class="action-btn save-btn">
+                                    <i class="fas fa-save"></i>
+                                    حفظ كملف
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share"></i>
+                                    مشاركة
+                                </button>
+                                <button class="action-btn reextract-btn">
+                                    <i class="fas fa-redo"></i>
+                                    استخراج جديد
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="history-section">
+                    <h3>الاستخراجات السابقة</h3>
+                    <div class="history-list" id="historyList">
+                        <div class="empty-history">
+                            <i class="fas fa-history"></i>
+                            <p>لا توجد استخراجات سابقة</p>
+                            <small>سيتم عرض الاستخراجات التي تقوم بها هنا</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/extract.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توليد الصور - Salah</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- القائمة الجانبية -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-robot"></i> Salah</h2>
+            </div>
+            <ul class="menu">
+                <li><a href="/home"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="/generate" class="active"><i class="fas fa-magic"></i> توليد الصور</a></li>
+                <li><a href="/edit"><i class="fas fa-edit"></i> تعديل الصور</a></li>
+                <li><a href="/extract"><i class="fas fa-search"></i> استخراج البرومبتات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+            </ul>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <p class="username">مستخدم Salah</p>
+                    <p class="user-status">الحساب مجاني</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <div class="header">
+                <div class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <h1>توليد الصور</h1>
+                <div class="user-actions">
+                    <button class="btn-notification"><i class="fas fa-bell"></i></button>
+                    <button class="btn-upgrade">ترقية الحساب</button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="generate-container">
+                    <div class="input-section">
+                        <h2>أدخل وصف الصورة التي تريد توليدها</h2>
+                        <p class="section-description">صف ما تريد رؤيته في الصورة بتفاصيل واضحة للحصول على أفضل النتائج</p>
+                        
+                        <div class="prompt-input-container">
+                            <textarea id="prompt-input" placeholder="مثال: منظر طبيعي لغروب الشمس على شاطئ البحر مع نخيل وألوان ذهبية..."></textarea>
+                            <div class="prompt-counter">
+                                <span id="char-count">0</span>/500 حرف
+                            </div>
+                        </div>
+                        
+                        <div class="style-options">
+                            <h3>اختر نمط الصورة</h3>
+                            <div class="style-grid">
+                                <div class="style-option" data-style="realistic">
+                                    <i class="fas fa-camera"></i>
+                                    <span>واقعي</span>
+                                </div>
+                                <div class="style-option" data-style="artistic">
+                                    <i class="fas fa-palette"></i>
+                                    <span>فني</span>
+                                </div>
+                                <div class="style-option" data-style="abstract">
+                                    <i class="fas fa-shapes"></i>
+                                    <span>تجريدي</span>
+                                </div>
+                                <div class="style-option" data-style="cartoon">
+                                    <i class="fas fa-smile"></i>
+                                    <span>كرتون</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="advanced-options">
+                            <h3>
+                                <i class="fas fa-cog"></i>
+                                خيارات متقدمة
+                                <span class="toggle-advanced">إظهار <i class="fas fa-chevron-down"></i></span>
+                            </h3>
+                            <div class="advanced-content" style="display: none;">
+                                <div class="size-options">
+                                    <label>حجم الصورة:</label>
+                                    <div class="size-buttons">
+                                        <button class="size-btn active" data-size="512x512">512x512</button>
+                                        <button class="size-btn" data-size="768x768">768x768</button>
+                                        <button class="size-btn" data-size="1024x1024">1024x1024</button>
+                                    </div>
+                                </div>
+                                <div class="quality-options">
+                                    <label>جودة الصورة:</label>
+                                    <div class="quality-buttons">
+                                        <button class="quality-btn active" data-quality="standard">قياسي</button>
+                                        <button class="quality-btn" data-quality="high">عالية</button>
+                                        <button class="quality-btn" data-quality="ultra">فائقة</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="generate-btn" class="generate-button">
+                            <i class="fas fa-magic"></i>
+                            توليد الصورة
+                        </button>
+                    </div>
+                    
+                    <div class="output-section">
+                        <h2>الصورة المولدة</h2>
+                        <div class="result-placeholder" id="resultPlaceholder">
+                            <i class="fas fa-image"></i>
+                            <p>الصورة المولدة ستظهر هنا</p>
+                            <small>سيتم عرض النتيجة بعد اكتمال التوليد</small>
+                        </div>
+                        <div class="generated-image" id="generatedImage" style="display: none;">
+                            <div class="image-container">
+                                <img id="result-image" src="" alt="الصورة المولدة">
+                                <div class="image-overlay">
+                                    <button class="overlay-btn fullscreen-btn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="image-info">
+                                <h4>معلومات الصورة</h4>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span>الوصف:</span>
+                                        <p id="image-prompt"></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span>النمط:</span>
+                                        <p id="image-style"></p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span>الوقت:</span>
+                                        <p id="image-time"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="image-actions">
+                                <button class="action-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                    تحميل الصورة
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share"></i>
+                                    مشاركة
+                                </button>
+                                <button class="action-btn regenerate-btn">
+                                    <i class="fas fa-redo"></i>
+                                    إعادة توليد
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="history-section">
+                    <h3>الصور المولدة سابقاً</h3>
+                    <div class="history-grid" id="historyGrid">
+                        <div class="empty-history">
+                            <i class="fas fa-history"></i>
+                            <p>لا توجد صور مولدة سابقاً</p>
+                            <small>سيتم عرض الصور التي تقوم بتوليدها هنا</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة العرض الكامل -->
+    <div class="fullscreen-modal" id="fullscreenModal" style="display: none;">
+        <div class="fullscreen-content">
+            <button class="close-fullscreen">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="fullscreen-image" src="" alt="الصورة المولدة">
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/generate.js"></script>
+</body>
+</html>
