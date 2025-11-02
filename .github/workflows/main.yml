@@ -17,9 +17,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 2. Run Buildozer Android Debug Build
-      # تم التحديث: نستخدم إجراء GitHub Actions مخصص وموثوق به (Action)
-      # هذا الإجراء يحل مشكلة "Coudn't find the 'buildozer' executable"
-      uses: Artem-B/buildozer-action@v1
+      # تم التحديث: لقد استبدلنا الإجراء القديم (Artem-B/buildozer-action@v1) 
+      # بالإجراء البديل المستقر cseelye/buildozer-action@master، لحل مشكلة 'repository not found'.
+      uses: cseelye/buildozer-action@master
       with:
         # الأمر الذي سيتم تنفيذه داخل بيئة Buildozer
         command: buildozer android debug
