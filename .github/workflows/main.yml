@@ -17,12 +17,14 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 2. Run Buildozer Android Debug Build
-      # نستخدم صورة Docker معدة مسبقاً (Buildozer/Kivy/Android SDK) لتسهيل عملية البناء
-      uses: docker://buddydj/buildozer:latest
-      
-      # يتم تمرير الأمر 'android debug' إلى داخل حاوية Docker
+      # تم التحديث: نستخدم إجراء GitHub Actions مخصص وموثوق به (Action)
+      # هذا الإجراء يحل مشكلة "Coudn't find the 'buildozer' executable"
+      uses: Artem-B/buildozer-action@v1
       with:
-        args: android debug
+        # الأمر الذي سيتم تنفيذه داخل بيئة Buildozer
+        command: buildozer android debug
+        # يمكنك تحديد إصدار Python. استخدم الإصدار الذي استخدمته لتطوير تطبيقك.
+        python_version: 3.11 # يمكنك تغيير هذا إلى 3.9 أو 3.10 إذا لزم الأمر
         
     - name: 3. Upload APK Artifact
       # يقوم هذا الأمر بحفظ ملف APK الناتج كـ "Artifact" يمكنك تحميله
