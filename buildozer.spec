@@ -17,8 +17,9 @@ source.dir = .
 main.py = mobile_main.py 
 
 # (list) المكتبات المطلوبة لتشغيل التطبيق
-# تم تضمين كل من Flask ومكتبات الواجهة (Kivy, plyer)
-requirements = python3, kivy==2.3.0, flask, flask-cors, requests, pillow, python-dotenv, werkzeug, python-for-android, plyer
+# تم حذف 'python-for-android' و'plyer' (لأنها مدمجة عادةً)
+# وتم إضافة 'setuptools' و 'certifi' لضمان عمل مكتبة requests بشكل سليم.
+requirements = python3, setuptools, kivy==2.3.0, flask, flask-cors, requests, pillow, python-dotenv, werkzeug, certifi
 
 # (list) مجلدات البايثون الإضافية التي يجب تضمينها (الخلفية والواجهة)
 # هذا يضمن تضمين مجلدات backend و frontend بالكامل
@@ -52,3 +53,4 @@ log_level = 2
 
 # (str) هل سيتم إنشاء ملف AAB لمتجر Play
 # android.release_artifact = aab
+
