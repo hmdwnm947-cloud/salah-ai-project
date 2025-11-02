@@ -17,10 +17,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 2. Run Buildozer Android Debug Build
-      # ***الإصلاح النهائي والموصى به***
-      # تم استبدال الإجراء الفاشل (cseelye/buildozer-action) بالإجراء الرسمي والمستقر
-      # من مجتمع Kivy، لضمان الاستمرارية والموثوقية.
-      uses: kivy/buildozer-action@v1
+      # ***الإصلاح رقم 3: استخدام إجراء Buildozer بديل وموثوق***
+      # تم الانتقال إلى 'inclement/buildozer-action' الذي يستخدم مساراً مختلفاً لحل مشكلة 'repository not found'
+      uses: inclement/buildozer-action@v1
       with:
         # الأمر الذي سيتم تنفيذه داخل بيئة Buildozer
         command: buildozer android debug
