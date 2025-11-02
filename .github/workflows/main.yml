@@ -19,7 +19,7 @@ jobs:
     - name: 2. Run Buildozer Android Debug Build
       # ***الإصلاح النهائي والموصى به***
       # تم استبدال الإجراء الفاشل (cseelye/buildozer-action) بالإجراء الرسمي والمستقر
-      # من مجتمع Kivy.
+      # من مجتمع Kivy، لضمان الاستمرارية والموثوقية.
       uses: kivy/buildozer-action@v1
       with:
         # الأمر الذي سيتم تنفيذه داخل بيئة Buildozer
