@@ -1,0 +1,35 @@
+name: Android Build with Buildozer
+
+# يتم تشغيل هذا السير العمل عند الرفع إلى فرع main، أو يدوياً عبر واجهة GitHub
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build_android:
+    # نستخدم بيئة Ubuntu لأنها الأفضل لعمليات بناء Buildozer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. Checkout repository
+      # يجلب هذا الأمر الكود من مستودعك
+      uses: actions/checkout@v4
+
+    - name: 2. Run Buildozer Android Debug Build
+      # نستخدم صورة Docker معدة مسبقاً (Buildozer/Kivy/Android SDK) لتسهيل عملية البناء
+      uses: docker://buddydj/buildozer:latest
+      
+      # يتم تمرير الأمر 'android debug' إلى داخل حاوية Docker
+      with:
+        args: android debug
+        
+    - name: 3. Upload APK Artifact
+      # يقوم هذا الأمر بحفظ ملف APK الناتج كـ "Artifact" يمكنك تحميله
+      uses: actions/upload-artifact@v4
+      with:
+        name: Salah-AI-Android-APK
+        # المسار الافتراضي لملفات APK/AAB التي ينشئها Buildozer
+        path: bin/*.apk
+        retention-days: 7 # الاحتفاظ بالملف لمدة 7 أيام
+
